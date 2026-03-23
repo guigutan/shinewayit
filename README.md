@@ -21,15 +21,15 @@
 
 
 ## 适配 Vue3 + Vite + TS 的组件库Element Plus
-1、安装：npm install element-plus --save
+1、安装：npm install element-plus --save        
 2、全局注册（src/main.js）：    
-        import { createApp } from 'vue'
-        import ElementPlus from 'element-plus' // 引入 Element Plus 核心库
-        import 'element-plus/dist/index.css'   // 引入 Element Plus 样式
-        import App from './App.vue'
-        const app = createApp(App)
-        app.use(ElementPlus) // 全局注册
-        app.mount('#app')      
+        import { createApp } from 'vue' 
+        import ElementPlus from 'element-plus' // 引入 Element Plus 核心库      
+        import 'element-plus/dist/index.css'   // 引入 Element Plus 样式        
+        import App from './App.vue'     
+        const app = createApp(App)      
+        app.use(ElementPlus) // 全局注册        
+        app.mount('#app')       
         
 ## 路由安装
 1、
