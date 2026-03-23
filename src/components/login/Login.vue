@@ -1,6 +1,9 @@
 
 <script setup>
 import { ref, onMounted } from 'vue'
+import axios from 'axios';
+
+
 // 表单数据
 const form = ref({
   username: '',
