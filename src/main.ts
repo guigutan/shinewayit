@@ -1,5 +1,11 @@
 import { createApp } from 'vue'
-import './style.css'
+import ElementPlus from 'element-plus' // 引入 Element Plus 核心库
+import 'element-plus/dist/index.css'   // 引入 Element Plus 样式
 import App from './App.vue'
 
-createApp(App).mount('#app')
+
+
+//createApp(App).mount('#app') 改为以下：
+const app = createApp(App)
+app.use(ElementPlus)//全局注册 Element Plus
+app.mount('#app')
