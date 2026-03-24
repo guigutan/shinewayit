@@ -205,3 +205,22 @@ VITE_API_BASE_URL = http://192.168.99.32:3000/api
     })
 
 ```
+
+## TS 本身不认识 .vue 文件的类型
+1、在 src 目录下创建 env.d.ts
+```js
+        // src/env.d.ts
+        /// <reference types="vite/client" />
+
+        // 核心：声明所有 .vue 文件的类型，让 TS 识别
+        declare module '*.vue' {
+        import type { DefineComponent } from 'vue'
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/ban-types
+        const component: DefineComponent<{}, {}, any>
+        export default component
+        }
+```
+2、在tsconfig.app.json文件中确保 include 数组包含 .d.ts 声明文件
+```js
+        "include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.vue", "src/**/*.d.ts"],
+```

@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router';
 // 导入你的页面组件（如登录、首页）
-import Login from '../views/Login.vue';
-import Home from '../views/Home.vue';
+import Login from '../views/login/Login.vue';
+import Home from '../views/home/Home.vue';
 
 
 // 定义路由规则
