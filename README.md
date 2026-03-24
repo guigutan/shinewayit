@@ -152,4 +152,8 @@ VITE_API_BASE_URL = http://192.168.99.32:3000/api
                 app.use(router); // 注册路由
                 app.mount('#app');
 
+## 识别vue映射scr
+1、在tsconfig.app.json中的 "compilerOptions"对象中加入对象值：
+    "baseUrl": ".",              // 基准目录（项目根目录）  
+    "paths": {"@/*": ["src/*"]},  // 将 @/xxx 映射到 src/xxx    
 

@@ -2,9 +2,11 @@ import axios from 'axios';
 import { useUserStore } from '@/store/user';
 import router from '@/router';
 
+
 // 创建axios实例
 const request = axios.create({
-baseURL: import.meta.env.VITE_API_BASE_URL || 'http://localhost:3000/api', // 接口基础地址（Vite环境变量）
+//baseURL: import.meta.env.VITE_API_BASE_URL || 'http://localhost:3000/api', // 接口基础地址（Vite环境变量）
+baseURL: import.meta.env.VITE_API_BASE_URL , // 接口基础地址（Vite环境变量）
 timeout: 5000
 });
 

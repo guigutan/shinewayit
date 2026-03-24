@@ -3,6 +3,7 @@ import { createRouter, createWebHistory } from 'vue-router';
 import Login from '@/views/Login.vue';
 import Home from '@/views/Home.vue';
 
+
 // 定义路由规则
 const routes = [
 { path: '/', redirect: '/login' },
@@ -12,7 +13,7 @@ const routes = [
 
 // 创建路由实例
 const router = createRouter({
-history: createWebHistory(import.meta.env.BASE_URL), // Vite 环境变量，Webpack 用 process.env.BASE_URL
+history: createWebHistory(import.meta.env.BASE_URL), // Vite 环境变量
 routes
 });
 

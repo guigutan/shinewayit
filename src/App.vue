@@ -1,7 +1,5 @@
-<script setup lang="ts">
-  import Login from './components/Logins/Login.vue'
-</script>
+<script setup lang="ts"> </script>
 
 <template>
-  <Login />
+  <HelloWorld />
 </template>
