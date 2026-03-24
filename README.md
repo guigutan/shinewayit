@@ -184,7 +184,24 @@ VITE_API_BASE_URL = http://192.168.99.32:3000/api
 ```
 
 ## 识别vue映射scr
-1、在tsconfig.app.json中的 "compilerOptions"对象中加入对象值：  
+1、在tsconfig.app.json中的 "compilerOptions"对象中加入对象值： 
+```json 
     "baseUrl": ".",              // 基准目录（项目根目录）    
     "paths": {"@/*": ["src/*"]},  // 将 @/xxx 映射到 src/xxx    
+```
+2、在vite.config.ts中的defineConfig函数中加入resolve参数：
+```js
+    import { defineConfig } from 'vite'
+    import vue from '@vitejs/plugin-vue'
+    import path from 'path'; // 需引入 path 模块
+    export default defineConfig({
+    plugins: [vue()],
+    resolve: {
+        // 配置路径别名
+        alias: {
+        '@': path.resolve(__dirname, 'src') // 关键：将 @ 指向项目根目录下的 src 文件夹
+        }
+    }
+    })
 
+```
