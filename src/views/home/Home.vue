@@ -7,5 +7,5 @@
 <style scoped src="./home.css"></style>
 
 <template>
-  123
+  home
 </template>
