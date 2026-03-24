@@ -19,6 +19,7 @@
 5、版本：npx vite -v  
 
 ## 目录结构
+```context
 src/
  ├── App.vue          # 根组件
  ├── main.ts          # 入口文件（注册 Pinia/Element Plus/路由）
@@ -29,6 +30,7 @@ src/
  ├── utils/           # 工具函数（Axios 封装）
  ├── views/           # 页面组件
  └── style.css        # 全局样式
+```
 
 ## 适配 Vue3 + Vite + TS 的组件库Element Plus
 1、安装：npm install element-plus --save        
