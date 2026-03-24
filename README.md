@@ -18,7 +18,17 @@
 4、启动：npm run dev  
 5、版本：npx vite -v  
 
-
+## 目录结构
+src/
+ ├── App.vue          # 根组件
+ ├── main.ts          # 入口文件（注册 Pinia/Element Plus/路由）
+ ├── assets/          # 静态资源
+ ├── components/      # 公共组件
+ ├── router/          # 路由配置
+ ├── stores/          # Pinia 状态管理
+ ├── utils/           # 工具函数（Axios 封装）
+ ├── views/           # 页面组件
+ └── style.css        # 全局样式
 
 ## 适配 Vue3 + Vite + TS 的组件库Element Plus
 1、安装：npm install element-plus --save        
@@ -35,15 +45,17 @@
 ## 安装 Axios（请求库）
 1、最新稳定版：npm install axios --save 
 2、配置 Axios（请求封装）   
-    创建src/utils/request.js封装 Axios：    
+        创建src/utils/request.js封装 Axios：    
 ```js
     import axios from 'axios';
     import { useUserStore } from '@/store/user';
     import router from '@/router';
 
+
     // 创建axios实例
     const request = axios.create({
-    baseURL: import.meta.env.VITE_API_BASE_URL || 'http://localhost:3000/api', // 接口基础地址（Vite环境变量）
+    //baseURL: import.meta.env.VITE_API_BASE_URL || 'http://localhost:3000/api', // 接口基础地址（Vite环境变量）
+    baseURL: import.meta.env.VITE_API_BASE_URL , // 接口基础地址（Vite环境变量）
     timeout: 5000
     });
 
@@ -97,25 +109,38 @@ VITE_API_BASE_URL = http://192.168.99.32:3000/api
  ```
 3、创建 Pinia 仓库（src/store/user.js），管理用户信息：
 ```js
+    // src/stores/user.ts
     import { defineStore } from 'pinia';
 
-    export const useUserStore = defineStore('user', {
-    // 状态：存储用户信息
-    state: () => ({
-    userInfo: JSON.parse(sessionStorage.getItem('userInfo')) || null
-    }),
-    // 操作：修改用户信息
-    actions: {
-    // 设置用户信息（登录成功调用）
-    setUserInfo(info) {
-    this.userInfo = info;
-    sessionStorage.setItem('userInfo', JSON.stringify(info));
-    },
-    // 清空用户信息（退出登录调用）
-    clearUserInfo() {
-    this.userInfo = null;
-    sessionStorage.removeItem('userInfo');
+    // 第一步：声明用户信息的类型接口（规范数据结构）
+    interface UserInfo {
+    id?: number;
+    username?: string;
+    nickname?: string;
+    role?: string;
+    // 可根据实际返回的用户信息扩展字段
     }
+
+    export const useUserStore = defineStore('user', {
+    // 状态：存储用户信息（明确类型）
+    state: (): { userInfo: UserInfo | null } => ({
+        // 修复：先判断是否为null，再执行JSON.parse
+        userInfo: sessionStorage.getItem('userInfo') 
+        ? JSON.parse(sessionStorage.getItem('userInfo')!) 
+        : null
+    }),
+    // 操作：修改用户信息（给参数声明类型）
+    actions: {
+        // 设置用户信息（登录成功调用）
+        setUserInfo(info: UserInfo): void {
+        this.userInfo = info;
+        sessionStorage.setItem('userInfo', JSON.stringify(info));
+        },
+        // 清空用户信息（退出登录调用）
+        clearUserInfo(): void {
+        this.userInfo = null;
+        sessionStorage.removeItem('userInfo');
+        }
     }
     });
 ```
