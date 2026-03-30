@@ -45,7 +45,7 @@ src/
     app.mount('#app')       
 ```        
 ## 安装 Axios（请求库）
-1、最新稳定版：npm install axios --save 
+1、最新稳定版：npm install axios --save     
 2、配置 Axios（请求封装）   
         创建src/utils/request.js封装 Axios：    
 ```js
@@ -96,8 +96,8 @@ VITE_API_BASE_URL = http://192.168.99.32:3000/api
 
 
 ## 安装 Pinia（状态管理）
-1、最新稳定版：npm install pinia --save
-2、在src/main.js中注册 Pinia，并创建用户信息仓库：
+1、最新稳定版：npm install pinia --save     
+2、在src/main.js中注册 Pinia，并创建用户信息仓库：  
  ```js
     import { createApp } from 'vue';
     import { createPinia } from 'pinia'; // 导入Pinia
@@ -183,7 +183,7 @@ VITE_API_BASE_URL = http://192.168.99.32:3000/api
     app.mount('#app');
 ```
 
-## 识别vue映射scr
+## 识别vue映射scr（本项目未使用）
 1、在tsconfig.app.json中的 "compilerOptions"对象中加入对象值： 
 ```json 
     "baseUrl": ".",              // 基准目录（项目根目录）    
