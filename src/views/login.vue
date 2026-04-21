@@ -4,13 +4,13 @@
       <h1>Directus 登录</h1>
       <form @submit.prevent="handleLogin">
         <div class="form-group">
-          <label for="email">邮箱</label>
+          <label for="username">用户名</label>
           <input
-            id="email"
-            v-model="email"
-            type="email"
+            id="username"
+            v-model="username"
+            type="text"
             required
-            placeholder="请输入邮箱"
+            placeholder="请输入用户名"
             :disabled="authStore.loading"
           />
         </div>
@@ -47,33 +47,60 @@ import { useAuthStore } from '../stores/auth'
 const router = useRouter()
 const authStore = useAuthStore()
 
-const email = ref('')
+const username = ref('')
 const password = ref('')
 const errorMessage = ref('')
+
+// 将用户名转换为完整邮箱：如果未包含@则添加 @123.com
+const toEmail = (input: string): string => {
+  if (input.includes('@')) {
+    return input
+  }
+  return `${input}@123.com`
+}
+
+// 错误消息映射（英文 -> 中文）
+const translateErrorMessage = (originalMessage: string): string => {
+  const messageMap: Record<string, string> = {
+    'Invalid user credentials.': '用户名或密码错误，请重新输入',
+    'User not found': '用户不存在',
+    'Email not verified': '邮箱未验证，请先验证邮箱',
+    'Password too weak': '密码强度不足',
+    'Token expired': '登录已过期，请重新登录',
+    'Invalid token': '无效的令牌，请重新登录',
+  }
+  // 如果映射表中有对应的中文，返回中文；否则返回原始消息
+  return messageMap[originalMessage] || originalMessage
+}
 
 const handleLogin = async () => {
   errorMessage.value = ''
   
+  const email = toEmail(username.value)
+  
   try {
     await authStore.login({
-      email: email.value,
+      email: email,
       password: password.value,
     })
-    // 登录成功，跳转到首页
     router.push('/home')
   } catch (error: any) {
-    // 处理不同的错误响应
+    // 获取后端返回的错误消息
+    let originalMsg = '登录失败，请检查网络连接或用户名密码是否正确'
     if (error.response?.data?.errors) {
-      errorMessage.value = error.response.data.errors[0]?.message || '登录失败'
-    } else {
-      errorMessage.value = '登录失败，请检查网络连接或邮箱密码是否正确'
+      originalMsg = error.response.data.errors[0]?.message || originalMsg
+    } else if (error.message) {
+      originalMsg = error.message
     }
+    // 转换为中文
+    errorMessage.value = translateErrorMessage(originalMsg)
     console.error('Login error:', error)
   }
 }
 </script>
 
 <style scoped>
+/* 样式完全保持不变 */
 .login-container {
   display: flex;
   justify-content: center;
