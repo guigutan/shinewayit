@@ -1,15 +1,19 @@
 import { createApp } from 'vue'
-import ElementPlus from 'element-plus' // 引入 Element Plus 核心库
-import 'element-plus/dist/index.css'   // 引入 Element Plus 样式
- import { createPinia } from 'pinia'; // 导入Pinia
- import router from './router'; // 导入路由
+import { createPinia } from 'pinia'
 import App from './App.vue'
+import router from './router'
+import { useAuthStore } from './stores/auth'
 
-
-
-//createApp(App).mount('#app') 改为以下：
 const app = createApp(App)
-app.use(ElementPlus)//全局注册 Element Plus
-app.use(createPinia()); // 注册Pinia
- app.use(router); // 注册路由
+const pinia = createPinia()
+
+app.use(pinia)
+app.use(router)
+
+// 初始化认证状态后再挂载应用
+const authStore = useAuthStore()
+await authStore.initAuth()
+
 app.mount('#app')
+
+
