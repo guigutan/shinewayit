@@ -1,7 +1,7 @@
 <template>
   <div class="login-container">
     <div class="login-card">
-      <h1>Directus 登录</h1>
+      <h1>数据中心</h1>
       <form @submit.prevent="handleLogin">
         <div class="form-group">
           <label for="username">用户名</label>
