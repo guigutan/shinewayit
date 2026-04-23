@@ -3,12 +3,12 @@
   <aside class="sidebar" :class="{ 'mobile-open': mobileMenuOpen }">
     <div class="sidebar-header">
       <div class="logo" v-show="!isCollapsed">
-        <span class="logo-icon">K</span>
-        <span class="logo-text">KAIZHONG</span>
+        <!-- <span class="logo-icon">S</span> -->
+        <span class="logo-text">SHINEWAY</span>
       </div>
-      <div class="logo-icon-only" v-show="isCollapsed">K</div>
+      <div class="logo-icon-only" v-show="isCollapsed">S</div>
       <button class="collapse-btn" @click="$emit('toggleCollapse')">
-        {{ isCollapsed ? '☰' : '◀' }}
+        {{ isCollapsed ? '☰' : '«' }}
       </button>
     </div>
 
@@ -22,7 +22,7 @@
           <div class="menu-item" @click="$emit('toggleExpand', item.key)">
             <span class="menu-icon">{{ item.icon }}</span>
             <span class="menu-label" v-show="!isCollapsed">{{ item.label }}</span>
-            <span class="expand-icon" v-show="!isCollapsed">{{ expandedKeys.includes(item.key) ? '▼' : '▶' }}</span>
+            <span class="expand-icon" v-show="!isCollapsed">{{ expandedKeys.includes(item.key) ? '📍' : '📌' }}</span>
           </div>
           <ul class="sub-menu" v-show="expandedKeys.includes(item.key) && !isCollapsed">
             <li v-for="child in item.children" :key="child.key" class="menu-item sub-item" :class="{ active: isTabActive(child.key) }" @click="$emit('openTab', child)">
@@ -103,7 +103,7 @@ defineEmits<{
 .collapse-btn {
   background: none;
   border: none;
-  font-size: 16px;
+  font-size: 24px;
   cursor: pointer;
   color: #5a6874;
   padding: 4px 8px;
