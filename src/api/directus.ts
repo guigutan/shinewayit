@@ -1,3 +1,5 @@
+//src\api\directus.ts
+
 import axios, { type AxiosInstance, type InternalAxiosRequestConfig } from 'axios'
 
 const TOKEN_KEY = 'directus_access_token'
@@ -6,7 +8,9 @@ const TOKEN_KEY = 'directus_access_token'
 // 自动检测：内网可达 → 用内网IP；否则 → 用公网IP
 async function getBestBaseURL() {
   const INTERNAL_URL = 'http://192.168.100.61:7001/';
-  const EXTERNAL_URL = 'http://61.142.21.100:7001/';
+  
+  // const EXTERNAL_URL = 'http://61.142.21.100:7001/';
+  const EXTERNAL_URL = 'https://directus.shinewaygroup.com:6001/';
 
   try {
     // 尝试请求内网接口（超时极短，不卡页面）

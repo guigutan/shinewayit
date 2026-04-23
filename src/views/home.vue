@@ -15,6 +15,7 @@
     />
 
     <main class="main">
+
       <TopBar
         :userName="userName"
         :userEmployeeId="userEmployeeId"
@@ -31,6 +32,7 @@
       />
 
       <MainContent :currentComponent="currentComponent" :activeTabKey="activeTabKey" />
+      
     </main>
   </div>
 </template>
@@ -117,8 +119,8 @@ const currentComponent = computed(() => {
 
 // 初始化默认标签页
 const initDefaultTab = () => {
-  const lineMenu = menuItems.find(m => m.key === 'line-attr')
-  if (lineMenu && tabs.value.length === 0) openTab(lineMenu)
+  const funcMapMenu = menuItems.find(m => m.key === 'func-map')
+  if (funcMapMenu && tabs.value.length === 0) openTab(funcMapMenu)
 }
 initDefaultTab()
 

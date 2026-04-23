@@ -37,6 +37,7 @@
 </template>
 
 <script setup lang="ts">
+
 import type { MenuItem } from '../config/menu'
 
 defineProps<{
@@ -53,6 +54,9 @@ defineEmits<{
   (e: 'openTab', item: MenuItem): void
 }>()
 </script>
+
+
+
 
 <style scoped>
 .sidebar {

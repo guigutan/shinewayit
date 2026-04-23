@@ -1,16 +1,19 @@
 <!-- src/components/TopBar.vue -->
 <template>
   <header class="top-bar">
+
     <div class="left-area">
       <button class="hamburger" @click="$emit('toggleMobileMenu')">☰</button>
       <span class="system-title">生产制造运营管理系统</span>
     </div>
+
     <div class="right-area">
       <div class="user-greeting">您好，{{ userName }} {{ userEmployeeId ? `[${userEmployeeId}]` : '' }}</div>
       <button class="logout-btn" @click="$emit('logout')" :disabled="loading">
         {{ loading ? '登出中...' : '登出' }}
       </button>
     </div>
+    
   </header>
 </template>
 
