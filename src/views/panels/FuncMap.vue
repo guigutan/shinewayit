@@ -1,6 +1,6 @@
 <template>
   <div class="panel">
-    <div>产线属性维护</div>
+    <div></div>
   </div>
 </template>
 

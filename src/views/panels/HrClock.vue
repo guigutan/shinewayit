@@ -1,6 +1,6 @@
 <template>
   <div class="panel">
-    <div>产能利用率工序</div>
+    <div>开发中，敬请期待...</div>
   </div>
 </template>
 

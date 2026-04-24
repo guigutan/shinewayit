@@ -4,9 +4,9 @@
     <div class="sidebar-header">
       <div class="logo" v-show="!isCollapsed">
         <!-- <span class="logo-icon">S</span> -->
-        <span class="logo-text">SHINEWAY</span>
+        <span class="logo-text">数据管理中心</span>
       </div>
-      <div class="logo-icon-only" v-show="isCollapsed">S</div>
+      <!-- <div class="logo-icon-only" v-show="isCollapsed">S</div> -->
       <button class="collapse-btn" @click="$emit('toggleCollapse')">
         {{ isCollapsed ? '☰' : '«' }}
       </button>
@@ -61,8 +61,9 @@ defineEmits<{
 <style scoped>
 .sidebar {
   width: 260px;
-  background: #ffffff;
-  border-right: 1px solid #e9ecef;
+  background: #3085BB;
+ 
+  border-right: 1px solid #e6e8ec;
   display: flex;
   flex-direction: column;
   transition: width 0.2s;
@@ -74,24 +75,25 @@ defineEmits<{
 .sidebar-header {
   display: flex;
   justify-content: space-between;
+  /* justify-content: center; */
   align-items: center;
   padding: 20px 16px;
-  border-bottom: 1px solid #edf2f7;
+  border-bottom: 1px solid #e6e8ec;
 }
 .logo {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 8px;  
 }
 .logo-icon {
-  font-size: 24px;
+  font-size: 16px;
   font-weight: bold;
   color: #2c6e9e;
 }
 .logo-text {
-  font-size: 16px;
+  font-size: 18px;
   font-weight: 600;
-  color: #1a2c3e;
+  color: white; 
 }
 .logo-icon-only {
   font-size: 24px;
@@ -105,7 +107,7 @@ defineEmits<{
   border: none;
   font-size: 24px;
   cursor: pointer;
-  color: #5a6874;
+  color: white;
   padding: 4px 8px;
   border-radius: 4px;
 }
@@ -124,7 +126,7 @@ defineEmits<{
   padding: 10px 12px;
   cursor: pointer;
   border-radius: 8px;
-  color: #334155;
+ color: white;
   transition: all 0.2s;
   margin-bottom: 2px;
 }

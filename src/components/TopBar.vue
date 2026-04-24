@@ -4,14 +4,11 @@
 
     <div class="left-area">
       <button class="hamburger" @click="$emit('toggleMobileMenu')">☰</button>
-      <span class="system-title">生产制造运营管理系统</span>
+      <span class="system-title"></span>
     </div>
 
     <div class="right-area">
-      <div class="user-greeting">您好，{{ userName }} {{ userEmployeeId ? `[${userEmployeeId}]` : '' }}</div>
-      <button class="logout-btn" @click="$emit('logout')" :disabled="loading">
-        {{ loading ? '登出中...' : '登出' }}
-      </button>
+      <div class="user-greeting">您好，{{ userName }} {{ userEmployeeId ? `[${userEmployeeId}]` : '' }}<span class="logout-btn" @click="$emit('logout')" :disabled="loading"> {{ loading ? '退出登录中...' : '退出登录' }}</span> </div>            
     </div>
     
   </header>
@@ -32,12 +29,11 @@ defineEmits<{
 
 <style scoped>
 .top-bar {
-  background: white;
+  background:  #3085BB;
   padding: 12px 24px;
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  border-bottom: 1px solid #e9ecef;
+  align-items: center; 
 }
 .left-area {
   display: flex;
@@ -54,7 +50,7 @@ defineEmits<{
 .system-title {
   font-size: 18px;
   font-weight: 600;
-  color: #1e2a3a;
+   color:white;
 }
 .right-area {
   display: flex;
@@ -63,20 +59,18 @@ defineEmits<{
   font-size: 14px;
 }
 .user-greeting {
-  color: #2c3e50;
+   color: white;
 }
 .logout-btn {
-  background: #ef4444;
-  border: none;
-  padding: 6px 16px;
-  border-radius: 6px;
-  color: white;
+  padding-left: 15px;
+  color: rgb(241, 104, 212);
+  border: none;   
   cursor: pointer;
   font-size: 14px;
   transition: background 0.2s;
 }
 .logout-btn:hover:not(:disabled) {
-  background: #dc2626;
+   color: rgb(196, 43, 163);
 }
 .logout-btn:disabled {
   opacity: 0.6;

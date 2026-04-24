@@ -1,6 +1,6 @@
 <template>
   <div class="panel">
-    <div>用户管理</div>
+    <div>开发中，敬请期待...</div>
   </div>
 </template>
 

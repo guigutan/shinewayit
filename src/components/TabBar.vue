@@ -26,9 +26,9 @@ defineEmits<{
 
 <style scoped>
 .tab-bar {
-  background: white;
-  border-bottom: 1px solid #e9ecef;
-  padding-left: 16px;
+   background:  #3085BB;  
+  /* border-bottom: 1px solid #df1436; */
+  padding-left: 20PX;
 }
 .tab-list {
   display: flex;
@@ -37,17 +37,24 @@ defineEmits<{
   gap: 4px;
 }
 .tab-item {
-  padding: 10px 20px;
+  padding: 5px;
   font-size: 14px;
-  cursor: pointer;
-  border-bottom: 2px solid transparent;
+  cursor: pointer; 
   white-space: nowrap;
   display: flex;
   align-items: center;
   gap: 8px;
+
+   background-color: #f0f2f6;
+  /* border-top: 1px solid #94a3b8;
+  border-left: 1px solid #94a3b8;
+  border-right: 1px solid #94a3b8;   */
+
+  border-radius: 5px 5px 0 0;
+
+
 }
-.tab-item.active {
-  border-bottom-color: #2c6e9e;
+.tab-item.active { 
   color: #2c6e9e;
   font-weight: 500;
 }
