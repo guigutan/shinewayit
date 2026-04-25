@@ -19,7 +19,7 @@
         <li>
           <label>所在区域：</label>
           <select v-model="queryParams.Area">
-            <!-- <option value="">全部</option> -->
+            <option value="">全部</option>
             <option value="一楼">一楼</option>
             <option value="二楼">二楼</option>
             <option value="三楼">三楼</option>
