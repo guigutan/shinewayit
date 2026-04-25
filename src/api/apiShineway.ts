@@ -1,4 +1,4 @@
-//src\api\directus.ts
+// src\api\apiShineway.ts
 
 import axios, { type AxiosInstance, type InternalAxiosRequestConfig } from 'axios'
 
@@ -33,13 +33,13 @@ async function getBestBaseURL() {
 
 
 // 创建 axios 实例
-const directusApi: AxiosInstance = axios.create({
+const apiShineway: AxiosInstance = axios.create({
   baseURL: await getBestBaseURL(), // 自动选择最优地址
   timeout: 10000,
 })
 
 // 请求拦截器：自动添加 token
-directusApi.interceptors.request.use((config: InternalAxiosRequestConfig) => {
+apiShineway.interceptors.request.use((config: InternalAxiosRequestConfig) => {
   const token = localStorage.getItem(TOKEN_KEY)
   if (token && config.headers) {
     config.headers.Authorization = `Bearer ${token}`
@@ -48,7 +48,7 @@ directusApi.interceptors.request.use((config: InternalAxiosRequestConfig) => {
 })
 
 // 响应拦截器：处理 401 未授权
-directusApi.interceptors.response.use(
+apiShineway.interceptors.response.use(
   (response) => response,
   (error) => {
     if (error.response?.status === 401) {
@@ -61,4 +61,4 @@ directusApi.interceptors.response.use(
   }
 )
 
-export default directusApi
+export default apiShineway

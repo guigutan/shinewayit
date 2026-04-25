@@ -3,7 +3,7 @@
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
 import type { User, LoginCredentials } from '../types/index'
-import directusApi from '../api/directus'
+import apiShineway from '../api/apiShineway'
 
 const TOKEN_KEY = 'directus_access_token'
 
@@ -27,7 +27,7 @@ export const useAuthStore = defineStore('auth', () => {
 
     try {
       // 验证 token 并获取用户信息（指定需要返回的字段）
-      const response = await directusApi.get('/users/me', {
+      const response = await apiShineway.get('/users/me', {
         params: { fields: ['id', 'email', 'first_name', 'last_name', 'role'] }
       })
       user.value = response.data.data
@@ -53,7 +53,7 @@ export const useAuthStore = defineStore('auth', () => {
   const login = async (credentials: LoginCredentials): Promise<void> => {
     loading.value = true
     try {
-      const response = await directusApi.post('/auth/login', {
+      const response = await apiShineway.post('/auth/login', {
         email: credentials.email,
         password: credentials.password,
       })
@@ -67,7 +67,7 @@ export const useAuthStore = defineStore('auth', () => {
       localStorage.setItem(TOKEN_KEY, accessToken)
 
       // 获取用户信息（指定需要返回的字段）
-      const userResponse = await directusApi.get('/users/me', {
+      const userResponse = await apiShineway.get('/users/me', {
 
         //  params: {  fields: ['*'] }
         params: { fields: ['id', 'email', 'first_name', 'last_name', 'role'] }
@@ -102,7 +102,7 @@ export const useAuthStore = defineStore('auth', () => {
     try {
       // 调用 Directus 登出接口，需要提供 refresh_token
       if (token.value && refreshToken.value) {
-        await directusApi.post('/auth/logout', {
+        await apiShineway.post('/auth/logout', {
           refresh_token: refreshToken.value
         }, {
           headers: { Authorization: `Bearer ${token.value}` }

@@ -43,20 +43,16 @@ defineEmits<{
   white-space: nowrap;
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 8px; 
 
    background-color: #f0f2f6;
-  /* border-top: 1px solid #94a3b8;
-  border-left: 1px solid #94a3b8;
-  border-right: 1px solid #94a3b8;   */
-
+   color: #c2c1c1;
   border-radius: 5px 5px 0 0;
-
 
 }
 .tab-item.active { 
   color: #2c6e9e;
-  font-weight: 500;
+  font-weight: bold;  
 }
 .tab-close {
   font-size: 18px;
