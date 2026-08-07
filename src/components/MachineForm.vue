@@ -1,14 +1,16 @@
 <script setup lang="ts">
 import { computed, reactive, ref, watch } from 'vue'
 import { createMachine, updateMachine } from '@/api/machines'
+import { listMachineTypes } from '@/api/machine-types'
 import type { Machine, MachinePayload } from '@/types/machine'
+import type { MachineType } from '@/types/machine-type'
 
 const props = defineProps<{ open: boolean; machine: Machine | null }>()
 const emit = defineEmits<{ close: []; saved: [machine: Machine] }>()
 
 const emptyForm = (): MachinePayload => ({
   MachineNO: '', ShortName: null, FullName: null, Brand: null, Model: null, Detail: null,
-  Area: '一楼', Stype: 'CNC', OutDate: null, Status: 1, MacAddr: null, IpAddr: null,
+  Area: '一楼', Stype: '', OutDate: null, Status: 1, MacAddr: null, IpAddr: null,
   PortNum: null, OrderBy: 0, trCount: 0, tdCount: 0, colIndex: 0, tempItem: null,
   tempOneToMany: 1, operator: 'shinewayit',
 })
@@ -16,6 +18,7 @@ const emptyForm = (): MachinePayload => ({
 const form = reactive<MachinePayload>(emptyForm())
 const saving = ref(false)
 const errorMessage = ref('')
+const machineTypes = ref<MachineType[]>([])
 const isEditing = computed(() => props.machine !== null)
 
 const resetForm = (): void => {
@@ -30,7 +33,16 @@ const resetForm = (): void => {
   } : emptyForm())
   errorMessage.value = ''
 }
-watch(() => [props.open, props.machine] as const, resetForm, { immediate: true })
+watch(() => [props.open, props.machine] as const, async ([open]) => {
+  resetForm()
+  if (!open) return
+  try {
+    machineTypes.value = await listMachineTypes(true)
+    if (!form.Stype && machineTypes.value[0]) form.Stype = machineTypes.value[0].Stype
+  } catch {
+    errorMessage.value = '设备类型加载失败，请先检查设备类型管理'
+  }
+}, { immediate: true })
 
 const normalize = (): MachinePayload => {
   const nullable = (value: string | null): string | null => value?.trim() || null
@@ -78,7 +90,10 @@ const submit = async (): Promise<void> => {
               <label>简称<input v-model="form.ShortName" maxlength="100" /></label>
               <label class="form-grid__wide">完整名称<input v-model="form.FullName" maxlength="200" /></label>
               <label>区域 <b>*</b><input v-model="form.Area" maxlength="30" /></label>
-              <label>设备类型 <b>*</b><input v-model="form.Stype" maxlength="30" /></label>
+              <label>设备类型 <b>*</b><select v-model="form.Stype">
+                <option value="" disabled>请选择设备类型</option>
+                <option v-for="type in machineTypes" :key="type.Stype" :value="type.Stype">{{ type.DisplayName }}（{{ type.Stype }}）</option>
+              </select></label>
               <label>品牌<input v-model="form.Brand" maxlength="50" /></label>
               <label>型号<input v-model="form.Model" maxlength="50" /></label>
               <label>出厂日期<input v-model="form.OutDate" type="date" /></label>

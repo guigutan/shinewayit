@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "dayjs": "^1.11.21",
+    "exceljs": "^4.4.0",
     "vue": "^3.5.40",
     "vue-router": "^5.2.0"
   },

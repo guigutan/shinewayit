@@ -1,0 +1,41 @@
+/* Airy light-blue theme */
+:root {
+  color: #18324a;
+  background: #f2f8fd;
+  --ink: #18324a;
+  --muted: #66819b;
+  --line: #d8e8f5;
+  --paper: #fff;
+  --teal: #3c91d0;
+  --teal-dark: #2878b4;
+  --danger: #bd4d5a;
+}
+body { background: linear-gradient(145deg, #f5faff, #edf6fd); }
+.sidebar { color:#eaf6ff;background:linear-gradient(170deg,#286b9d,#225b88 58%,#19496f);box-shadow:10px 0 32px #25638d24 }
+.brand span,.sidebar__footer span { color:#b8d8ee }
+.sidebar__section-label,.nav-item small { color:#9fc7e3 }
+.nav-item { color:#d1e7f6 }
+.nav-item:hover,.nav-item--active { color:#fff;background:#ffffff24 }
+.nav-item--active::before { background:#9ed7ff }
+.brand__mark { background:#61afe5;box-shadow:0 8px 22px #143e5f40 }
+.topbar { background:#ffffffed;box-shadow:0 4px 18px #3a7da50a }
+.operator__avatar,.button--dark { background:#317fb8 }
+.button--primary { box-shadow:0 7px 18px #3c91d033 }
+.button--ghost { color:#52718d }
+.card { border-color:#dcebf6;box-shadow:0 10px 32px #2d719d0d }
+.hero-card { background:radial-gradient(circle at 76% 8%,#b9e2ff55,transparent 34%),linear-gradient(135deg,#438fc4,#286c9e);box-shadow:0 20px 50px #286c9e2b }
+.hero-card p { color:#e1f1fb }
+.hero-card__visual span { color:#c8ebff }
+.hero-card__visual small { color:#d0e8f7 }
+.module-card__icon,.machine-identity>span { background:#e9f5fd }
+.filter-bar { background:#f5faff }
+.filter-input,.search-field { border-color:#cfe3f2 }
+.form-grid input:focus,.form-grid select:focus,.form-grid textarea:focus { border-color:#68ace0;box-shadow:0 0 0 3px #3c91d018 }
+th { background:#f5faff;color:#607e98 }
+tbody tr:hover { background:#f4faff }
+.dialog-scrim,.sidebar-scrim { background:#143d5d80 }
+.machine-dialog { background:#f3f9fd;box-shadow:-20px 0 60px #174b7033 }
+.login-page { background:radial-gradient(circle at 70% 20%,#b9e3ff45,transparent 34%),linear-gradient(145deg,#397fac,#1e5279) }
+.login-card label,.password-card label { color:#55738e }
+.account-popover { box-shadow:0 15px 35px #255b7e22 }
+.account-popover a:hover,.account-popover button:hover { background:#eff8fe }
