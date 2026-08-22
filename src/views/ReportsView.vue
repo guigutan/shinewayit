@@ -23,10 +23,11 @@ const labels: Record<string, string> = {
   startDate: '开始日期', startTime: '开始时间', endDate: '结束日期', endTime: '结束时间',
   days: '共计天', hours: '共计时', minutes: '共计分', leaveType: '请假类型', reason: '事由',
   remark: '备注', destination: '出差地点', signDate: '签卡日期', scheduleTime: '排班时间',
-  signTime: '签卡时间', attendanceStatus: '考勤状态', createdAt: '创建时间', currentNode: '当前节点',
+  signTime: '签卡时间', attendanceStatus: '考勤状态', signCategory: '签卡类别', makeupType: '补卡类型',
+  createdAt: '创建时间', currentNode: '当前节点',
 }
 const preferred = ['workCode', 'name', 'hireDate', 'startDate',
-  'startTime', 'endDate', 'endTime', 'signDate', 'scheduleTime', 'signTime', 'attendanceStatus', 'days',
+  'startTime', 'endDate', 'endTime', 'signDate', 'scheduleTime', 'signTime', 'attendanceStatus', 'signCategory', 'makeupType', 'days',
   'hours', 'minutes', 'leaveType', 'destination', 'reason', 'remark', 'createdAt', 'currentNode', 'requestId']
 const rows = ref<ReportRow[]>([])
 const loading = ref(false)
