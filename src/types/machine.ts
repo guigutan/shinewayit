@@ -16,6 +16,7 @@ export interface Machine {
   OrderBy: number | null
   trCount: number | null
   tdCount: number | null
+  rowIndex: number | null
   colIndex: number | null
   tempItem: string | null
   tempOneToMany: number
@@ -42,6 +43,7 @@ export interface MachinePayload {
   OrderBy: number
   trCount: number
   tdCount: number
+  rowIndex: number
   colIndex: number
   tempItem: string | null
   tempOneToMany: number

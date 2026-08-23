@@ -1,15 +1,16 @@
 <script setup lang="ts">
 import { computed, reactive, ref, watch } from 'vue'
 import { listReport, type ReportRow, type ReportType } from '@/api/reports'
+import DateRangePresets from '@/components/DateRangePresets.vue'
+import { dateRangeFor, type DateRangePreset } from '@/utils/date-range'
 
-const pad = (value: number) => String(value).padStart(2, '0')
-const now = new Date()
+const initialRange = dateRangeFor('current-month')
 const filters = reactive({
   type: 'leave' as ReportType,
   name: '',
   workCode: '',
-  startDate: `${now.getFullYear()}-${pad(now.getMonth() + 1)}-01`,
-  endDate: `${now.getFullYear()}-${pad(now.getMonth() + 1)}-${pad(new Date(now.getFullYear(), now.getMonth() + 1, 0).getDate())}`,
+  startDate: initialRange.startDate,
+  endDate: initialRange.endDate,
 })
 const reports = [
   { value: 'leave', label: '请假单' },
@@ -34,6 +35,7 @@ const loading = ref(false)
 const exporting = ref(false)
 const searched = ref(false)
 const errorMessage = ref('')
+const activeDatePreset = ref<DateRangePreset | null>('current-month')
 const columns = computed(() => preferred.filter((key) => rows.value.some((row) => key in row)))
 const showTotals = computed(() => ['leave', 'group-leave', 'group-overtime'].includes(filters.type))
 const total = (key: 'days' | 'hours' | 'minutes') => rows.value.reduce((sum, row) => sum + (Number(row[key]) || 0), 0)
@@ -47,6 +49,11 @@ const search = async () => {
   try { rows.value = (await listReport(filters)).data }
   catch (error) { errorMessage.value = error instanceof Error ? error.message : '报表查询失败' }
   finally { loading.value = false }
+}
+const selectDatePreset = (preset: DateRangePreset) => {
+  activeDatePreset.value = preset
+  Object.assign(filters, dateRangeFor(preset))
+  void search()
 }
 
 const exportExcel = async () => {
@@ -80,11 +87,12 @@ const exportExcel = async () => {
   <section class="card report-card">
     <header class="machine-card__header"><div><span class="eyebrow">REPORT CENTER</span><h2>报表查询</h2><p>按日期和人员条件查询业务数据，并可导出 Excel。</p></div></header>
     <form class="filter-bar report-filter" @submit.prevent="search">
+      <DateRangePresets :active="activeDatePreset" @select="selectDatePreset" />
       <label><span>报表</span><select v-model="filters.type" class="filter-input"><option v-for="item in reports" :key="item.value" :value="item.value">{{ item.label }}</option></select></label>
       <label><span>用户姓名</span><input v-model.trim="filters.name" class="filter-input" placeholder="完整姓名"></label>
       <label><span>用户工号</span><input v-model.trim="filters.workCode" class="filter-input" placeholder="完整工号"></label>
-      <label><span>开始日期 *</span><input v-model="filters.startDate" class="filter-input" type="date" required></label>
-      <label><span>结束日期 *</span><input v-model="filters.endDate" class="filter-input" type="date" required></label>
+      <label><span>开始日期 *</span><input v-model="filters.startDate" class="filter-input" type="date" required @input="activeDatePreset=null"></label>
+      <label><span>结束日期 *</span><input v-model="filters.endDate" class="filter-input" type="date" required @input="activeDatePreset=null"></label>
       <button class="button button--dark" type="submit" :disabled="loading">{{ loading ? '查询中…' : '查询' }}</button>
       <button class="button button--export" type="button" :disabled="loading || exporting || !rows.length" @click="exportExcel">{{ exporting ? '导出中…' : '导出 Excel' }}</button>
     </form>

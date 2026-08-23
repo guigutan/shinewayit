@@ -9,7 +9,10 @@ import { RouterLink } from 'vue-router'
         <span class="eyebrow">SHINEWAY OPERATIONS</span>
         <h2>让设备与数据管理更清晰</h2>
         <p>管理中心已接入现有 MariaDB 业务数据。机台管理是第一个模块，其他业务能力可在左侧导航中持续扩展。</p>
-        <RouterLink class="button button--primary" to="/machines">进入机台管理</RouterLink>
+        <div class="hero-actions">
+          <RouterLink class="button button--primary" to="/machines">进入机台管理</RouterLink>
+          <a class="button button--dashboard" href="/scada/">查看看板</a>
+        </div>
       </div>
       <div class="hero-card__visual" aria-hidden="true"><span>01</span><strong>MODULE</strong><small>READY</small></div>
     </section>

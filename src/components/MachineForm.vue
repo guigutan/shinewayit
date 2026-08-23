@@ -11,7 +11,7 @@ const emit = defineEmits<{ close: []; saved: [machine: Machine] }>()
 const emptyForm = (): MachinePayload => ({
   MachineNO: '', ShortName: null, FullName: null, Brand: null, Model: null, Detail: null,
   Area: '一楼', Stype: '', OutDate: null, Status: 1, MacAddr: null, IpAddr: null,
-  PortNum: null, OrderBy: 0, trCount: 0, tdCount: 0, colIndex: 0, tempItem: null,
+  PortNum: null, OrderBy: 0, trCount: 0, tdCount: 0, rowIndex: 0, colIndex: 0, tempItem: null,
   tempOneToMany: 1, operator: 'shinewayit',
 })
 
@@ -28,7 +28,7 @@ const resetForm = (): void => {
     Brand: machine.Brand, Model: machine.Model, Detail: machine.Detail, Area: machine.Area,
     Stype: machine.Stype, OutDate: machine.OutDate, Status: machine.Status, MacAddr: machine.MacAddr,
     IpAddr: machine.IpAddr, PortNum: machine.PortNum, OrderBy: machine.OrderBy ?? 0,
-    trCount: machine.trCount ?? 0, tdCount: machine.tdCount ?? 0, colIndex: machine.colIndex ?? 0,
+    trCount: machine.trCount ?? 0, tdCount: machine.tdCount ?? 0, rowIndex: machine.rowIndex ?? 0, colIndex: machine.colIndex ?? 0,
     tempItem: machine.tempItem, tempOneToMany: machine.tempOneToMany, operator: 'shinewayit',
   } : emptyForm())
   errorMessage.value = ''
@@ -107,9 +107,10 @@ const submit = async (): Promise<void> => {
               <label>端口<input v-model.number="form.PortNum" type="number" min="1" max="65535" /></label>
               <label>MAC 地址<input v-model="form.MacAddr" maxlength="50" /></label>
               <label>显示顺序<input v-model.number="form.OrderBy" type="number" /></label>
-              <label>读取数量<input v-model.number="form.trCount" type="number" min="0" /></label>
-              <label>写入数量<input v-model.number="form.tdCount" type="number" min="0" /></label>
-              <label>列索引<input v-model.number="form.colIndex" type="number" min="0" /></label>
+              <label>分布图行数量<input v-model.number="form.trCount" type="number" min="1" /></label>
+              <label>分布图列数量<input v-model.number="form.tdCount" type="number" min="1" /></label>
+              <label>机台所在行<input v-model.number="form.rowIndex" type="number" min="1" :max="form.trCount||undefined" /></label>
+              <label>机台所在列<input v-model.number="form.colIndex" type="number" min="1" :max="form.tdCount||undefined" /></label>
               <label>一对多系数<input v-model.number="form.tempOneToMany" type="number" min="1" /></label>
               <label class="form-grid__wide">临时项目<input v-model="form.tempItem" maxlength="255" /></label>
               <label class="form-grid__wide">备注<textarea v-model="form.Detail" maxlength="512" rows="3" /></label>
